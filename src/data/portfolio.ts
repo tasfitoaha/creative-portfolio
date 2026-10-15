@@ -13,7 +13,7 @@ export const BRAND = {
   },
 };
 
-export type PageId = 'home' | 'writing' | 'specialties' | 'info' | 'message';
+export type PageId = 'home' | 'writing' | 'specialties' | 'info' | 'message' | 'pythagorean';
 
 export interface WritingEntry {
   title: string;

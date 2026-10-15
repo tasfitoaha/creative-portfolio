@@ -1,9 +1,14 @@
 import { useState } from 'react';
 import GlassPanel from '@/components/GlassPanel';
 import { SCRIPTS, BRAND_WORKS } from '@/data/portfolio';
-import { Terminal, Copy, Check, Filter, ImageIcon } from 'lucide-react';
+import { Terminal, Copy, Check, Filter, ImageIcon, Calculator, ExternalLink, Code2 } from 'lucide-react';
+import type { PageId } from '@/data/portfolio';
 
-export default function SpecialtiesPage() {
+interface SpecialtiesPageProps {
+  onNavigate: (page: PageId) => void;
+}
+
+export default function SpecialtiesPage({ onNavigate }: SpecialtiesPageProps) {
   const [activeScript, setActiveScript] = useState(0);
   const [copied, setCopied] = useState(false);
   const [activeFilter, setActiveFilter] = useState('All');
@@ -91,6 +96,39 @@ export default function SpecialtiesPage() {
                     {SCRIPTS[activeScript].code}
                   </code>
                 </pre>
+              </div>
+            </GlassPanel>
+
+            {/* Pythagorean Relation Finder project card */}
+            <GlassPanel className="mt-6 p-6 transition-all duration-300 hover:border-violet-400/30 hover:bg-white/[0.06] hover:shadow-[0_0_24px_rgba(139,92,246,0.12)]">
+              <div className="flex items-start gap-4">
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-violet-400/20 bg-violet-500/10">
+                  <Calculator className="h-6 w-6 text-violet-400" />
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-lg font-semibold text-white">
+                    Pythagorean Relation Finder
+                  </h3>
+                  <p className="mt-2 text-sm leading-relaxed text-white/50">
+                    A tool that searches for integer relationships between perfect squares.
+                  </p>
+                  <div className="mt-4 flex flex-wrap gap-3">
+                    <button
+                      onClick={() => onNavigate('pythagorean')}
+                      className="flex items-center gap-2 rounded-lg border border-cyan-400/30 bg-cyan-500/10 px-4 py-2 text-sm font-medium text-cyan-100 backdrop-blur-xl transition-all duration-300 hover:border-cyan-400/60 hover:bg-cyan-500/20 hover:shadow-[0_0_20px_rgba(0,153,255,0.15)]"
+                    >
+                      <ExternalLink className="h-3.5 w-3.5" />
+                      Open Tool
+                    </button>
+                    <button
+                      onClick={() => onNavigate('pythagorean')}
+                      className="flex items-center gap-2 rounded-lg border border-violet-400/20 bg-violet-500/10 px-4 py-2 text-sm font-medium text-violet-200 backdrop-blur-xl transition-all duration-300 hover:border-violet-400/40 hover:bg-violet-500/20"
+                    >
+                      <Code2 className="h-3.5 w-3.5" />
+                      View Code
+                    </button>
+                  </div>
+                </div>
               </div>
             </GlassPanel>
           </div>

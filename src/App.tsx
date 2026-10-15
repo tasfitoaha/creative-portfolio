@@ -6,6 +6,7 @@ import WritingPage from '@/pages/WritingPage';
 import SpecialtiesPage from '@/pages/SpecialtiesPage';
 import InfoPage from '@/pages/InfoPage';
 import MessagePage from '@/pages/MessagePage';
+import PythagoreanTool from '@/pages/PythagoreanTool';
 import type { PageId } from '@/data/portfolio';
 
 function ScrollProgress() {
@@ -50,9 +51,10 @@ export default function App() {
       <main className="relative z-10 min-h-screen">
         {activePage === 'home' && <HomePage onNavigate={handleNavigate} />}
         {activePage === 'writing' && <WritingPage />}
-        {activePage === 'specialties' && <SpecialtiesPage />}
+        {activePage === 'specialties' && <SpecialtiesPage onNavigate={handleNavigate} />}
         {activePage === 'info' && <InfoPage />}
         {activePage === 'message' && <MessagePage />}
+        {activePage === 'pythagorean' && <PythagoreanTool onNavigate={handleNavigate} />}
       </main>
 
       <footer className="relative z-10 border-t border-white/5 px-6 py-10">
