@@ -16,11 +16,7 @@ import {
   CheckCircle,
   Calculator,
 } from 'lucide-react';
-import type { PageId } from '@/data/portfolio';
-
-interface PythagoreanToolProps {
-  onNavigate: (page: PageId) => void;
-}
+import { useNavigate } from 'react-router-dom';
 
 type Tab = 'calculator' | 'c-code' | 'how-it-works';
 type SearchStatus = 'idle' | 'searching' | 'done' | 'stopped' | 'error';
@@ -38,7 +34,8 @@ interface FourSolution {
   d: number;
 }
 
-export default function PythagoreanTool({ onNavigate }: PythagoreanToolProps) {
+export default function PythagoreanTool() {
+  const navigate = useNavigate();
   const [tab, setTab] = useState<Tab>('calculator');
   const [input, setInput] = useState('');
   const [status, setStatus] = useState<SearchStatus>('idle');
@@ -229,7 +226,7 @@ export default function PythagoreanTool({ onNavigate }: PythagoreanToolProps) {
       <section className="mx-auto max-w-5xl">
         {/* Back button */}
         <button
-          onClick={() => onNavigate('specialties')}
+          onClick={() => navigate('/specialties')}
           className="mb-6 flex items-center gap-2 text-sm text-white/45 transition-colors hover:text-cyan-300"
         >
           <ArrowLeft className="h-4 w-4" />

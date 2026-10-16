@@ -2,14 +2,11 @@ import { useState } from 'react';
 import GlassPanel from '@/components/GlassPanel';
 import { SCRIPTS, BRAND_WORKS, CREATIVE_STUDIES } from '@/data/portfolio';
 import { Terminal, Copy, Check, Filter, ImageIcon, Calculator, ExternalLink, Code2, Music, Palette } from 'lucide-react';
-import type { PageId } from '@/data/portfolio';
 import AudioDashboard from '@/components/AudioDashboard';
+import { useNavigate } from 'react-router-dom';
 
-interface SpecialtiesPageProps {
-  onNavigate: (page: PageId) => void;
-}
-
-export default function SpecialtiesPage({ onNavigate }: SpecialtiesPageProps) {
+export default function SpecialtiesPage() {
+  const navigate = useNavigate();
   const [activeScript, setActiveScript] = useState(0);
   const [copied, setCopied] = useState(false);
   const [activeFilter, setActiveFilter] = useState('All');
@@ -123,14 +120,14 @@ export default function SpecialtiesPage({ onNavigate }: SpecialtiesPageProps) {
                   </p>
                   <div className="mt-4 flex flex-wrap gap-3">
                     <button
-                      onClick={() => onNavigate('mathviz')}
+                      onClick={() => navigate('/mathviz')}
                       className="flex items-center gap-2 rounded-lg border border-cyan-400/30 bg-cyan-500/10 px-4 py-2 text-sm font-medium text-cyan-100 backdrop-blur-xl transition-all duration-200 ease-in-out hover:scale-[1.02] hover:border-cyan-400/60 hover:bg-cyan-500/20 hover:shadow-[0_0_20px_rgba(0,153,255,0.15)]"
                     >
                       <ExternalLink className="h-3.5 w-3.5" />
                       Open Tool
                     </button>
                     <button
-                      onClick={() => onNavigate('mathviz')}
+                      onClick={() => navigate('/mathviz')}
                       className="flex items-center gap-2 rounded-lg border border-violet-400/20 bg-violet-500/10 px-4 py-2 text-sm font-medium text-violet-200 backdrop-blur-xl transition-all duration-200 ease-in-out hover:scale-[1.02] hover:border-violet-400/40 hover:bg-violet-500/20"
                     >
                       <Code2 className="h-3.5 w-3.5" />
