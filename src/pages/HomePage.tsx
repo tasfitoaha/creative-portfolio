@@ -1,21 +1,15 @@
 import GlassPanel from '@/components/GlassPanel';
 import { BRAND } from '@/data/portfolio';
 import { Mail, Phone, ArrowDown, PenTool, Code2, LayoutGrid } from 'lucide-react';
-import { useScrollReveal } from '@/hooks/useScrollReveal';
-import { useNavigate } from 'react-router-dom';
+import type { PageId } from '@/data/portfolio';
 
-const DISCIPLINES = [
-  { color: 'cyan', label: 'Vector Graphic Layouts', icon: LayoutGrid, desc: 'Precision-engineered design systems — business cards, ID badges, publication templates, and marketing flyers built with geometric intent.', boxClass: '' },
-  { color: 'blue', label: 'Psychological Literature', icon: PenTool, desc: 'Long-form manuscripts exploring fear mechanics, subconscious habits, the uncanny valley, and dual-language conceptual reflection.', boxClass: 'discipline-blue' },
-  { color: 'violet', label: 'Background Script Utilities', icon: Code2, desc: 'Custom PowerShell, VBScript, and batch automation tools for document searching, system monitoring, and optimization workflows.', boxClass: 'discipline-violet' },
-];
+interface HomePageProps {
+  onNavigate: (page: PageId) => void;
+}
 
-export default function HomePage() {
-  const navigate = useNavigate();
-  const revealRef = useScrollReveal<HTMLDivElement>();
-
+export default function HomePage({ onNavigate }: HomePageProps) {
   return (
-    <div ref={revealRef} className="px-6 pb-20 pt-32">
+    <div className="px-6 pb-20 pt-32">
       {/* Hero */}
       <section className="mx-auto max-w-5xl pt-8">
         <div className="mb-6 flex items-center gap-2 rounded-full border border-cyan-400/20 bg-cyan-500/5 px-4 py-1.5 backdrop-blur-xl sm:inline-flex">
@@ -23,23 +17,23 @@ export default function HomePage() {
           <span className="text-sm font-medium text-cyan-200/90">Portfolio — v1.0</span>
         </div>
 
-        <h1 className="animate-fade-in text-glow cursor-default text-4xl font-bold leading-[1.1] tracking-tight text-white sm:text-6xl md:text-7xl">
+        <h1 className="animate-fade-in text-4xl font-bold leading-[1.1] tracking-tight text-white sm:text-6xl md:text-7xl">
           {BRAND.name}
         </h1>
 
-        <p className="mt-8 max-w-3xl animate-fade-in-delay-1 text-glow cursor-default text-lg leading-relaxed text-white/55 sm:text-xl">
+        <p className="mt-8 max-w-3xl animate-fade-in-delay-1 text-lg leading-relaxed text-white/55 sm:text-xl">
           {BRAND.subtitle}
         </p>
 
         <div className="mt-10 flex flex-wrap gap-3 animate-fade-in-delay-2">
           <button
-            onClick={() => navigate('/specialties')}
+            onClick={() => onNavigate('specialties')}
             className="rounded-xl border border-cyan-400/30 bg-cyan-500/10 px-7 py-3 font-medium text-cyan-100 backdrop-blur-xl transition-all duration-200 ease-in-out hover:scale-[1.02] hover:border-cyan-400/60 hover:bg-cyan-500/20 hover:shadow-[0_0_30px_rgba(0,153,255,0.2)]"
           >
             View Specialties
           </button>
           <button
-            onClick={() => navigate('/writing')}
+            onClick={() => onNavigate('writing')}
             className="rounded-xl border border-white/10 bg-white/5 px-7 py-3 font-medium text-white/75 backdrop-blur-xl transition-all duration-200 ease-in-out hover:scale-[1.02] hover:border-white/20 hover:bg-white/10"
           >
             Read Writing
@@ -71,64 +65,51 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Three disciplines, one vision — 33-box matrix */}
+      {/* Three pillars */}
       <section className="mx-auto mt-28 max-w-6xl">
-        <h2 className="mb-2 text-center text-2xl font-bold text-white/80 sm:text-3xl animate-fade-in-delay-1 text-glow cursor-default">
+        <h2 className="mb-10 text-center text-2xl font-bold text-white/80 sm:text-3xl animate-fade-in-delay-1">
           Three disciplines, one vision
         </h2>
-        <p className="mb-10 text-center text-sm text-white/35">
-          33 skill nodes across 3 domains
-        </p>
-
         <div className="grid gap-6 md:grid-cols-3">
-          {DISCIPLINES.map((disc, di) => {
-            const Icon = disc.icon;
-            return (
-              <GlassPanel
-                key={disc.label}
-                data-reveal
-                className={`reveal card-hover-lift p-8 hover:bg-white/[0.06]`}
-              >
-                <Icon
-                  className={`mb-5 h-9 w-9 ${
-                    di === 0 ? 'text-cyan-400' : di === 1 ? 'text-blue-400' : 'text-violet-400'
-                  }`}
-                />
-                <h3 className="text-xl font-semibold text-white text-glow cursor-default">
-                  {disc.label}
-                </h3>
-                <p className="mt-3 text-sm leading-relaxed text-white/50">
-                  {disc.desc}
-                </p>
-
-                {/* 11-box sub-grid per discipline = 33 total */}
-                <div className="mt-6 grid grid-cols-11 gap-1.5">
-                  {Array.from({ length: 11 }, (_, i) => (
-                    <div
-                      key={i}
-                      className={`discipline-box ${disc.boxClass} aspect-square rounded-[4px] border border-white/10 bg-white/[0.03]`}
-                      style={{ animationDelay: `${di * 11 + i * 30}ms` }}
-                    />
-                  ))}
-                </div>
-              </GlassPanel>
-            );
-          })}
+          <GlassPanel className="p-8 transition-all duration-300 hover:border-cyan-400/20 hover:bg-white/[0.06]">
+            <LayoutGrid className="mb-5 h-9 w-9 text-cyan-400" />
+            <h3 className="text-xl font-semibold text-white">Vector Graphic Layouts</h3>
+            <p className="mt-3 text-sm leading-relaxed text-white/50">
+              Precision-engineered design systems — business cards, ID badges, publication
+              templates, and marketing flyers built with geometric intent.
+            </p>
+          </GlassPanel>
+          <GlassPanel className="p-8 transition-all duration-300 hover:border-blue-400/20 hover:bg-white/[0.06]">
+            <PenTool className="mb-5 h-9 w-9 text-blue-400" />
+            <h3 className="text-xl font-semibold text-white">Psychological Literature</h3>
+            <p className="mt-3 text-sm leading-relaxed text-white/50">
+              Long-form manuscripts exploring fear mechanics, subconscious habits, the
+              uncanny valley, and dual-language conceptual reflection.
+            </p>
+          </GlassPanel>
+          <GlassPanel className="p-8 transition-all duration-300 hover:border-indigo-400/20 hover:bg-white/[0.06]">
+            <Code2 className="mb-5 h-9 w-9 text-indigo-400" />
+            <h3 className="text-xl font-semibold text-white">Background Script Utilities</h3>
+            <p className="mt-3 text-sm leading-relaxed text-white/50">
+              Custom PowerShell, VBScript, and batch automation tools for document
+              searching, system monitoring, and optimization workflows.
+            </p>
+          </GlassPanel>
         </div>
       </section>
 
       {/* CTA strip */}
       <section className="mx-auto mt-28 max-w-4xl">
-        <GlassPanel data-reveal className="reveal flex flex-col items-center gap-6 p-10 text-center md:p-14">
-          <h2 className="text-glow cursor-default text-2xl font-bold text-white sm:text-3xl">
+        <GlassPanel className="flex flex-col items-center gap-6 p-10 text-center md:p-14">
+          <h2 className="text-2xl font-bold text-white sm:text-3xl">
             Want to get in touch?
           </h2>
-          <p className="max-w-xl text-glow cursor-default leading-relaxed text-white/50">
+          <p className="max-w-xl leading-relaxed text-white/50">
             Reach out through any of the contact channels below, or drop a message directly
             through the message box.
           </p>
           <button
-            onClick={() => navigate('/message')}
+            onClick={() => onNavigate('message')}
             className="rounded-xl border border-cyan-400/30 bg-cyan-500/10 px-8 py-3.5 font-medium text-cyan-100 backdrop-blur-xl transition-all duration-200 ease-in-out hover:scale-[1.02] hover:border-cyan-400/60 hover:bg-cyan-500/20 hover:shadow-[0_0_30px_rgba(0,153,255,0.2)]"
           >
             Open Message Box

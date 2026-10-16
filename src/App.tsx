@@ -1,5 +1,4 @@
-import { useEffect } from 'react';
-import { Routes, Route, useLocation, Navigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import BackgroundEngine from '@/components/BackgroundEngine';
 import Header from '@/components/Header';
 import HomePage from '@/pages/HomePage';
@@ -9,43 +8,61 @@ import InfoPage from '@/pages/InfoPage';
 import MessagePage from '@/pages/MessagePage';
 import PythagoreanTool from '@/pages/PythagoreanTool';
 import MathVisualizers from '@/pages/MathVisualizers';
+import type { PageId } from '@/data/portfolio';
 
-function PageEffects() {
-  const location = useLocation();
+function ScrollProgress() {
+  const [progress, setProgress] = useState(0);
 
   useEffect(() => {
-    const pageName = location.pathname === '/' ? 'home' : location.pathname.slice(1);
-    document.title = `Haniw Mejelin — ${pageName.charAt(0).toUpperCase() + pageName.slice(1)}`;
+    const handler = () => {
+      const total = document.documentElement.scrollHeight - window.innerHeight;
+      if (total > 0) setProgress((window.scrollY / total) * 100);
+    };
+    window.addEventListener('scroll', handler, { passive: true });
+    handler();
+    return () => window.removeEventListener('scroll', handler);
+  }, []);
 
+  return (
+    <div
+      className="fixed left-0 top-0 z-50 h-[2px] bg-gradient-to-r from-cyan-400 to-blue-500"
+      style={{ width: `${progress}%` }}
+    />
+  );
+}
+
+export default function App() {
+  const [activePage, setActivePage] = useState<PageId>('home');
+
+  const handleNavigate = (page: PageId) => {
+    setActivePage(page);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  useEffect(() => {
+    document.title = `Haniw Mejelin — ${activePage.charAt(0).toUpperCase() + activePage.slice(1)}`;
+
+    // Pause all audio elements when navigating away from any page
     document.querySelectorAll('audio').forEach((el) => {
       el.pause();
       el.currentTime = 0;
     });
+  }, [activePage]);
 
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }, [location.pathname]);
-
-  return null;
-}
-
-export default function App() {
   return (
     <>
       <BackgroundEngine />
-      <Header />
-      <PageEffects />
+      <ScrollProgress />
+      <Header activePage={activePage} onNavigate={handleNavigate} />
 
       <main className="relative z-10 min-h-screen">
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/writing" element={<WritingPage />} />
-          <Route path="/specialties" element={<SpecialtiesPage />} />
-          <Route path="/info" element={<InfoPage />} />
-          <Route path="/message" element={<MessagePage />} />
-          <Route path="/pythagorean" element={<PythagoreanTool />} />
-          <Route path="/mathviz" element={<MathVisualizers />} />
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Routes>
+        {activePage === 'home' && <HomePage onNavigate={handleNavigate} />}
+        {activePage === 'writing' && <WritingPage />}
+        {activePage === 'specialties' && <SpecialtiesPage onNavigate={handleNavigate} />}
+        {activePage === 'info' && <InfoPage />}
+        {activePage === 'message' && <MessagePage />}
+        {activePage === 'pythagorean' && <PythagoreanTool onNavigate={handleNavigate} />}
+        {activePage === 'mathviz' && <MathVisualizers onNavigate={handleNavigate} />}
       </main>
 
       <footer className="relative z-10 border-t border-white/5 px-6 py-10">

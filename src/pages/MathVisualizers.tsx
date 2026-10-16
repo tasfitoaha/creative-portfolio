@@ -4,7 +4,11 @@ import PythagoreanCalculator from '@/components/PythagoreanCalculator';
 import UlamSpiral from '@/components/UlamSpiral';
 import CollatzVisualizer from '@/components/CollatzVisualizer';
 import { ArrowLeft, Calculator, Grid3x3, TrendingUp } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import type { PageId } from '@/data/portfolio';
+
+interface MathVisualizersProps {
+  onNavigate: (page: PageId) => void;
+}
 
 type MathTab = 'pythagorean' | 'ulam' | 'collatz';
 
@@ -14,8 +18,7 @@ const TABS: { id: MathTab; label: string; icon: typeof Calculator }[] = [
   { id: 'collatz', label: 'Collatz Conjecture', icon: TrendingUp },
 ];
 
-export default function MathVisualizers() {
-  const navigate = useNavigate();
+export default function MathVisualizers({ onNavigate }: MathVisualizersProps) {
   const [tab, setTab] = useState<MathTab>('pythagorean');
 
   return (
@@ -23,7 +26,7 @@ export default function MathVisualizers() {
       <section className="mx-auto max-w-5xl">
         {/* Back button */}
         <button
-          onClick={() => navigate('/specialties')}
+          onClick={() => onNavigate('specialties')}
           className="mb-6 flex items-center gap-2 text-sm text-white/45 transition-colors hover:text-cyan-300"
         >
           <ArrowLeft className="h-4 w-4" />
