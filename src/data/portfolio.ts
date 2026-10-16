@@ -13,7 +13,7 @@ export const BRAND = {
   },
 };
 
-export type PageId = 'home' | 'writing' | 'specialties' | 'info' | 'message' | 'pythagorean';
+export type PageId = 'home' | 'writing' | 'specialties' | 'info' | 'message' | 'pythagorean' | 'mathviz';
 
 export interface WritingEntry {
   title: string;
@@ -231,6 +231,11 @@ export interface EducationEntry {
 
 export const EDUCATION: EducationEntry[] = [
   {
+    level: 'Primary',
+    institution: 'PTI Gazipur',
+    detail: 'Completed primary education foundation.',
+  },
+  {
     level: 'SSC',
     institution: 'Ranibilashmini Govt High School',
     detail: 'Completed Secondary School Certificate',
@@ -262,5 +267,91 @@ export const TECH_FOUNDATIONS: TechFoundation[] = [
     name: 'HTML',
     description:
       'Designing semantic web frameworks, structural layouts, and responsive document matrices.',
+  },
+];
+
+export interface CoreSpecialty {
+  title: string;
+  description: string;
+}
+
+export const CORE_SPECIALTIES: CoreSpecialty[] = [
+  {
+    title: 'Creative Graphic Systems',
+    description:
+      'Expertise across diverse spatial asset layouts — including vector line art, UI/UX concept design, dynamic info tables, dithered micro-textures, branding logos, marketing flyers, business cards, letterboxes, custom ID badges, and functional game card matrices.',
+  },
+  {
+    title: 'Workspace Optimization & Custom Start Pages',
+    description:
+      'Engineering minimalist, high-focus custom browser launch dashboards — integrating real-time digital clocks, dynamic date parameters, and functional, grid-based micro-link layouts overlaid across high-fidelity atmospheric backgrounds.',
+  },
+  {
+    title: 'Multimedia Audio & Literary Work',
+    description:
+      'Technical explorations of atmosphere — composing chiptune arpeggios, ambient synthesizers, and atmospheric scores alongside early poetry exploration to aurally and conceptually anchor digital media projects.',
+  },
+  {
+    title: 'Intellectual Focus',
+    description:
+      'A dedicated interest in acquiring knowledge across diverse foundational areas, exploring complex systems across physics, microbiology, genetics, and comparative history and philosophy.',
+  },
+];
+
+export interface CreativeStudy {
+  title: string;
+  category: string;
+  description: string;
+  imageUrl: string;
+}
+
+export const CREATIVE_STUDIES: CreativeStudy[] = [
+  {
+    title: 'UI/UX Wireframe Concepts',
+    category: 'Brand & Layout Systems',
+    description:
+      'Clean placeholder text mapping out user profile edit portals, browser start pages, and micro-blogging grid interfaces.',
+    imageUrl:
+      'https://images.pexels.com/photos/1966452/pexels-photo-1966452.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+  },
+  {
+    title: 'Concert Promotional Media Suite',
+    category: 'Brand & Layout Systems',
+    description:
+      "Full-bleed poster, banner, and promotional flyer assets designed for college music band 'Wings of Dusk', balancing heavy color grading, soft cloud masking, dynamic title typography layers, and textured paper tear details.",
+    imageUrl:
+      'https://images.pexels.com/photos/1763075/pexels-photo-1763075.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+  },
+  {
+    title: 'High-Contrast Monochromatic Portrait',
+    category: 'Surrealism & Ink Studies',
+    description:
+      'A clean, high-impact binary stencil portrait utilizing stark shadow partitioning to map out light structures.',
+    imageUrl:
+      'https://images.pexels.com/photos/2086676/pexels-photo-2086676.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+  },
+  {
+    title: 'Organic Surreal Interior',
+    category: 'Surrealism & Ink Studies',
+    description:
+      'Detailed ink line study exploring isolated spaces, granular particle degradation, and abstract focal structures blending into a dreamlike interior.',
+    imageUrl:
+      'https://images.pexels.com/photos/1693671/pexels-photo-1693671.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+  },
+  {
+    title: 'Geometric Plant Macro Matrix',
+    category: 'Dithering & Texture Manifestations',
+    description:
+      'High-contrast botanical photo manipulation using retro dithered dot patterns and halftone print textures to create a deep, layered purple-tinted organic asset.',
+    imageUrl:
+      'https://images.pexels.com/photos/1112080/pexels-photo-1112080.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+  },
+  {
+    title: 'Abstract Solar Eclipsed Form',
+    category: 'Dithering & Texture Manifestations',
+    description:
+      'A dark, moody green graphic balancing soft glowing circular gradients against fine linen grain textures.',
+    imageUrl:
+      'https://images.pexels.com/photos/957024/forest-trees-perspective-bright-957024.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
   },
 ];

@@ -2,14 +2,17 @@ import GlassPanel from '@/components/GlassPanel';
 import { BRAND } from '@/data/portfolio';
 import { Mail, Phone, ArrowDown, PenTool, Code2, LayoutGrid } from 'lucide-react';
 import type { PageId } from '@/data/portfolio';
+import { useScrollReveal } from '@/hooks/useScrollReveal';
 
 interface HomePageProps {
   onNavigate: (page: PageId) => void;
 }
 
 export default function HomePage({ onNavigate }: HomePageProps) {
+  const revealRef = useScrollReveal<HTMLDivElement>();
+
   return (
-    <div className="px-6 pb-20 pt-32">
+    <div ref={revealRef} className="px-6 pb-20 pt-32">
       {/* Hero */}
       <section className="mx-auto max-w-5xl pt-8">
         <div className="mb-6 flex items-center gap-2 rounded-full border border-cyan-400/20 bg-cyan-500/5 px-4 py-1.5 backdrop-blur-xl sm:inline-flex">
@@ -17,24 +20,24 @@ export default function HomePage({ onNavigate }: HomePageProps) {
           <span className="text-sm font-medium text-cyan-200/90">Portfolio — v1.0</span>
         </div>
 
-        <h1 className="text-4xl font-bold leading-[1.1] tracking-tight text-white sm:text-6xl md:text-7xl">
+        <h1 className="animate-fade-in text-glow cursor-default text-4xl font-bold leading-[1.1] tracking-tight text-white sm:text-6xl md:text-7xl">
           {BRAND.name}
         </h1>
 
-        <p className="mt-8 max-w-3xl text-lg leading-relaxed text-white/55 sm:text-xl">
+        <p className="mt-8 max-w-3xl animate-fade-in-delay-1 text-glow cursor-default text-lg leading-relaxed text-white/55 sm:text-xl">
           {BRAND.subtitle}
         </p>
 
-        <div className="mt-10 flex flex-wrap gap-3">
+        <div className="mt-10 flex flex-wrap gap-3 animate-fade-in-delay-2">
           <button
             onClick={() => onNavigate('specialties')}
-            className="rounded-xl border border-cyan-400/30 bg-cyan-500/10 px-7 py-3 font-medium text-cyan-100 backdrop-blur-xl transition-all duration-300 hover:border-cyan-400/60 hover:bg-cyan-500/20 hover:shadow-[0_0_30px_rgba(0,153,255,0.2)]"
+            className="rounded-xl border border-cyan-400/30 bg-cyan-500/10 px-7 py-3 font-medium text-cyan-100 backdrop-blur-xl transition-all duration-200 ease-in-out hover:scale-[1.02] hover:border-cyan-400/60 hover:bg-cyan-500/20 hover:shadow-[0_0_30px_rgba(0,153,255,0.2)]"
           >
             View Specialties
           </button>
           <button
             onClick={() => onNavigate('writing')}
-            className="rounded-xl border border-white/10 bg-white/5 px-7 py-3 font-medium text-white/75 backdrop-blur-xl transition-all duration-300 hover:border-white/20 hover:bg-white/10"
+            className="rounded-xl border border-white/10 bg-white/5 px-7 py-3 font-medium text-white/75 backdrop-blur-xl transition-all duration-200 ease-in-out hover:scale-[1.02] hover:border-white/20 hover:bg-white/10"
           >
             Read Writing
           </button>
@@ -67,29 +70,29 @@ export default function HomePage({ onNavigate }: HomePageProps) {
 
       {/* Three pillars */}
       <section className="mx-auto mt-28 max-w-6xl">
-        <h2 className="mb-10 text-center text-2xl font-bold text-white/80 sm:text-3xl">
+        <h2 className="mb-10 text-center text-2xl font-bold text-white/80 sm:text-3xl animate-fade-in-delay-1 text-glow cursor-default">
           Three disciplines, one vision
         </h2>
         <div className="grid gap-6 md:grid-cols-3">
-          <GlassPanel className="p-8 transition-all duration-300 hover:border-cyan-400/20 hover:bg-white/[0.06]">
+          <GlassPanel data-reveal className="reveal card-hover-lift p-8 hover:border-cyan-400/30 hover:bg-white/[0.06] hover:shadow-[0_0_40px_rgba(0,153,255,0.15)]">
             <LayoutGrid className="mb-5 h-9 w-9 text-cyan-400" />
-            <h3 className="text-xl font-semibold text-white">Vector Graphic Layouts</h3>
+            <h3 className="text-xl font-semibold text-white text-glow cursor-default">Vector Graphic Layouts</h3>
             <p className="mt-3 text-sm leading-relaxed text-white/50">
               Precision-engineered design systems — business cards, ID badges, publication
               templates, and marketing flyers built with geometric intent.
             </p>
           </GlassPanel>
-          <GlassPanel className="p-8 transition-all duration-300 hover:border-blue-400/20 hover:bg-white/[0.06]">
+          <GlassPanel data-reveal className="reveal card-hover-lift p-8 hover:border-blue-400/30 hover:bg-white/[0.06] hover:shadow-[0_0_40px_rgba(59,130,246,0.15)]">
             <PenTool className="mb-5 h-9 w-9 text-blue-400" />
-            <h3 className="text-xl font-semibold text-white">Psychological Literature</h3>
+            <h3 className="text-xl font-semibold text-white text-glow cursor-default">Psychological Literature</h3>
             <p className="mt-3 text-sm leading-relaxed text-white/50">
               Long-form manuscripts exploring fear mechanics, subconscious habits, the
               uncanny valley, and dual-language conceptual reflection.
             </p>
           </GlassPanel>
-          <GlassPanel className="p-8 transition-all duration-300 hover:border-indigo-400/20 hover:bg-white/[0.06]">
+          <GlassPanel data-reveal className="reveal card-hover-lift p-8 hover:border-indigo-400/30 hover:bg-white/[0.06] hover:shadow-[0_0_40px_rgba(139,92,246,0.15)]">
             <Code2 className="mb-5 h-9 w-9 text-indigo-400" />
-            <h3 className="text-xl font-semibold text-white">Background Script Utilities</h3>
+            <h3 className="text-xl font-semibold text-white text-glow cursor-default">Background Script Utilities</h3>
             <p className="mt-3 text-sm leading-relaxed text-white/50">
               Custom PowerShell, VBScript, and batch automation tools for document
               searching, system monitoring, and optimization workflows.
@@ -100,17 +103,17 @@ export default function HomePage({ onNavigate }: HomePageProps) {
 
       {/* CTA strip */}
       <section className="mx-auto mt-28 max-w-4xl">
-        <GlassPanel className="flex flex-col items-center gap-6 p-10 text-center md:p-14">
-          <h2 className="text-2xl font-bold text-white sm:text-3xl">
+        <GlassPanel data-reveal className="reveal flex flex-col items-center gap-6 p-10 text-center md:p-14">
+          <h2 className="text-glow cursor-default text-2xl font-bold text-white sm:text-3xl">
             Want to get in touch?
           </h2>
-          <p className="max-w-xl leading-relaxed text-white/50">
+          <p className="max-w-xl text-glow cursor-default leading-relaxed text-white/50">
             Reach out through any of the contact channels below, or drop a message directly
             through the message box.
           </p>
           <button
             onClick={() => onNavigate('message')}
-            className="rounded-xl border border-cyan-400/30 bg-cyan-500/10 px-8 py-3.5 font-medium text-cyan-100 backdrop-blur-xl transition-all duration-300 hover:border-cyan-400/60 hover:bg-cyan-500/20 hover:shadow-[0_0_30px_rgba(0,153,255,0.2)]"
+            className="rounded-xl border border-cyan-400/30 bg-cyan-500/10 px-8 py-3.5 font-medium text-cyan-100 backdrop-blur-xl transition-all duration-200 ease-in-out hover:scale-[1.02] hover:border-cyan-400/60 hover:bg-cyan-500/20 hover:shadow-[0_0_30px_rgba(0,153,255,0.2)]"
           >
             Open Message Box
           </button>

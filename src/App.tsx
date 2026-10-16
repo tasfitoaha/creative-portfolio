@@ -7,6 +7,7 @@ import SpecialtiesPage from '@/pages/SpecialtiesPage';
 import InfoPage from '@/pages/InfoPage';
 import MessagePage from '@/pages/MessagePage';
 import PythagoreanTool from '@/pages/PythagoreanTool';
+import MathVisualizers from '@/pages/MathVisualizers';
 import type { PageId } from '@/data/portfolio';
 
 function ScrollProgress() {
@@ -40,6 +41,12 @@ export default function App() {
 
   useEffect(() => {
     document.title = `Haniw Mejelin — ${activePage.charAt(0).toUpperCase() + activePage.slice(1)}`;
+
+    // Pause all audio elements when navigating away from any page
+    document.querySelectorAll('audio').forEach((el) => {
+      el.pause();
+      el.currentTime = 0;
+    });
   }, [activePage]);
 
   return (
@@ -55,6 +62,7 @@ export default function App() {
         {activePage === 'info' && <InfoPage />}
         {activePage === 'message' && <MessagePage />}
         {activePage === 'pythagorean' && <PythagoreanTool onNavigate={handleNavigate} />}
+        {activePage === 'mathviz' && <MathVisualizers onNavigate={handleNavigate} />}
       </main>
 
       <footer className="relative z-10 border-t border-white/5 px-6 py-10">

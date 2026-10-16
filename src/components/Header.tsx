@@ -41,7 +41,7 @@ export default function Header({ activePage, onNavigate }: HeaderProps) {
               <button
                 key={item.id}
                 onClick={() => handleNav(item.id)}
-                className={`relative rounded-lg px-4 py-2 text-sm font-medium transition-all duration-300 ${
+                className={`relative rounded-lg px-4 py-2 text-sm font-medium transition-all duration-200 ease-in-out hover:scale-[1.02] ${
                   activePage === item.id
                     ? 'text-cyan-300'
                     : 'text-white/50 hover:text-white/80'
@@ -49,7 +49,7 @@ export default function Header({ activePage, onNavigate }: HeaderProps) {
               >
                 {item.label}
                 {activePage === item.id && (
-                  <span className="absolute bottom-0 left-1/2 h-px w-6 -translate-x-1/2 bg-cyan-400" />
+                  <span className="absolute bottom-0 left-1/2 h-px w-6 -translate-x-1/2 bg-cyan-400 transition-opacity duration-200" />
                 )}
               </button>
             ))}
@@ -70,7 +70,7 @@ export default function Header({ activePage, onNavigate }: HeaderProps) {
               <button
                 key={item.id}
                 onClick={() => handleNav(item.id)}
-                className={`rounded-lg px-4 py-2.5 text-left text-sm font-medium transition-all ${
+                className={`rounded-lg px-4 py-2.5 text-left text-sm font-medium transition-all duration-200 ease-in-out hover:scale-[1.02] ${
                   activePage === item.id
                     ? 'bg-cyan-500/10 text-cyan-300'
                     : 'text-white/50 hover:bg-white/5 hover:text-white/80'
